@@ -27,7 +27,7 @@ typedef NS_ENUM(NSUInteger, FSCalendarMonthPosition);
  */
 @property (weak, nonatomic) UILabel  *subtitleLabel;
 
-
+@property (nonatomic,strong) UIImageView *starImgView;
 /**
  The shape layer of the cell
  */

@@ -64,6 +64,11 @@
     [self.contentView addSubview:label];
     self.subtitleLabel = label;
     
+    _starImgView=[[UIImageView alloc] init];
+    _starImgView.image=[UIImage imageNamed:@"lingsui000122"];
+    _starImgView.hidden=YES;
+    [self.contentView addSubview:_starImgView];
+    
     shapeLayer = [CAShapeLayer layer];
     shapeLayer.backgroundColor = [UIColor clearColor].CGColor;
     shapeLayer.borderWidth = 1.0;
@@ -155,6 +160,8 @@
                                        eventSize*0.83
                                       );
     
+     _starImgView.frame=CGRectMake(self.contentView.bounds.size.width-10, 2, 8, 8);
+    
 }
 
 - (void)prepareForReuse
@@ -215,6 +222,16 @@
     
     UIColor *borderColor = self.colorForCellBorder;
     UIColor *fillColor = self.colorForCellFill;
+    BOOL compareResult ;
+    compareResult=[self isTheSameColor2:fillColor anotherColor:[self colorWithHex:@"#871420"]];
+    
+    if (compareResult) {
+        NSLog(@"颜色一致！");
+         _starImgView.hidden=NO;
+    } else {
+        NSLog(@"颜色不一致");
+        _starImgView.hidden=YES;
+    }
     
     BOOL shouldHideShapeLayer = !self.selected && !self.dateIsToday && !borderColor && !fillColor;
     
@@ -254,7 +271,56 @@
     _eventIndicator.color = self.colorsForEvents;
 
 }
-
+-(BOOL)isTheSameColor2:(UIColor*)color1 anotherColor:(UIColor*)color2
+ {
+     if (CGColorEqualToColor(color1.CGColor, color2.CGColor)) {
+         return YES;
+     }
+     else {
+          return NO;
+      }
+ }
+- (UIColor *)colorWithHex:(NSString *)color
+{
+    NSString *cString = [[color stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
+    
+    // String should be 6 or 8 characters
+    if ([cString length] < 6) {
+        return [UIColor clearColor];
+    }
+    
+    // strip 0X if it appears
+    if ([cString hasPrefix:@"0X"])
+        cString = [cString substringFromIndex:2];
+    if ([cString hasPrefix:@"#"])
+        cString = [cString substringFromIndex:1];
+    if ([cString length] != 6)
+        return [UIColor clearColor];
+    
+    // Separate into r, g, b substrings
+    NSRange range;
+    range.location = 0;
+    range.length = 2;
+    
+    //r
+    NSString *rString = [cString substringWithRange:range];
+    
+    //g
+    range.location = 2;
+    NSString *gString = [cString substringWithRange:range];
+    
+    //b
+    range.location = 4;
+    NSString *bString = [cString substringWithRange:range];
+    
+    // Scan values
+    unsigned int r, g, b;
+    [[NSScanner scannerWithString:rString] scanHexInt:&r];
+    [[NSScanner scannerWithString:gString] scanHexInt:&g];
+    [[NSScanner scannerWithString:bString] scanHexInt:&b];
+    
+    return [UIColor colorWithRed:((float) r / 255.0f) green:((float) g / 255.0f) blue:((float) b / 255.0f) alpha:1.0f];
+}
 - (UIColor *)colorForCurrentStateInDictionary:(NSDictionary *)dictionary
 {
     if (self.isSelected) {
