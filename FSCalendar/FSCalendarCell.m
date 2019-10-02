@@ -138,8 +138,8 @@
     CGFloat titleHeight = self.bounds.size.height*5.0/6.0;
     CGFloat diameter = MIN(self.bounds.size.height*5.0/6.0,self.bounds.size.width);
     diameter = diameter > FSCalendarStandardCellDiameter ? (diameter - (diameter-FSCalendarStandardCellDiameter)*0.5) : diameter;
-    _shapeLayer.frame = CGRectMake((self.bounds.size.width-diameter)/2+3,
-                                   (titleHeight-diameter)/2,
+    _shapeLayer.frame = CGRectMake((self.bounds.size.width-diameter)/2,
+                                   (titleHeight-diameter)/2+3,
                                    diameter,
                                    diameter);
     //_shapeLayer.frame = CGRectMake(0,0,self.bounds.size.width,self.bounds.size.height);
