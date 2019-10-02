@@ -64,10 +64,10 @@
     [self.contentView addSubview:label];
     self.subtitleLabel = label;
     
-    _starImgView=[[UIImageView alloc] init];
-    _starImgView.image=[UIImage imageNamed:@"lingsui000122"];
-    _starImgView.hidden=YES;
-    [self.contentView addSubview:_starImgView];
+//    _starImgView=[[UIImageView alloc] init];
+//    _starImgView.image=[UIImage imageNamed:@"lingsui000122"];
+//    _starImgView.hidden=YES;
+//    [self.contentView addSubview:_starImgView];
     
     shapeLayer = [CAShapeLayer layer];
     shapeLayer.backgroundColor = [UIColor clearColor].CGColor;
@@ -127,7 +127,7 @@
     } else {
         _titleLabel.frame = CGRectMake(
                                        self.preferredTitleOffset.x,
-                                       self.preferredTitleOffset.y,
+                                       self.preferredTitleOffset.y+3,
                                        self.contentView.fs_width,
                                        floor(self.contentView.fs_height*5.0/6.0)
                                        );
@@ -138,7 +138,7 @@
     CGFloat titleHeight = self.bounds.size.height*5.0/6.0;
     CGFloat diameter = MIN(self.bounds.size.height*5.0/6.0,self.bounds.size.width);
     diameter = diameter > FSCalendarStandardCellDiameter ? (diameter - (diameter-FSCalendarStandardCellDiameter)*0.5) : diameter;
-    _shapeLayer.frame = CGRectMake((self.bounds.size.width-diameter)/2,
+    _shapeLayer.frame = CGRectMake((self.bounds.size.width-diameter)/2+3,
                                    (titleHeight-diameter)/2,
                                    diameter,
                                    diameter);
@@ -160,7 +160,7 @@
                                        eventSize*0.83
                                       );
     
-     _starImgView.frame=CGRectMake(self.contentView.bounds.size.width-10, 2, 8, 8);
+     //_starImgView.frame=CGRectMake(self.contentView.bounds.size.width-10, 2, 8, 8);
     
 }
 
@@ -227,10 +227,10 @@
     
     if (compareResult) {
         NSLog(@"颜色一致！");
-         _starImgView.hidden=NO;
+         //_starImgView.hidden=NO;
     } else {
         NSLog(@"颜色不一致");
-        _starImgView.hidden=YES;
+        //_starImgView.hidden=YES;
     }
     
     BOOL shouldHideShapeLayer = !self.selected && !self.dateIsToday && !borderColor && !fillColor;

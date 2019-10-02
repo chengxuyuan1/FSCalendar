@@ -310,12 +310,14 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
                 case FSCalendarScopeMonth: {
                     CGFloat contentHeight = rowHeight*6 + padding*2;
                     _daysContainer.frame = CGRectMake(0, headerHeight+weekdayHeight, self.fs_width, contentHeight);
+                      _daysContainer.frame = CGRectMake(0, headerHeight+weekdayHeight-5, self.fs_width, contentHeight);
                     _collectionView.frame = CGRectMake(0, 0, _daysContainer.fs_width, contentHeight);
                     break;
                 }
                 case FSCalendarScopeWeek: {
                     CGFloat contentHeight = rowHeight + padding*2;
                     _daysContainer.frame = CGRectMake(0, headerHeight+weekdayHeight, self.fs_width, contentHeight);
+                     _daysContainer.frame = CGRectMake(0, headerHeight+weekdayHeight-5, self.fs_width, contentHeight);
                     _collectionView.frame = CGRectMake(0, 0, _daysContainer.fs_width, contentHeight);
                     break;
                 }
@@ -1418,8 +1420,7 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
 - (void)reloadDataForCell:(FSCalendarCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     cell.layer.borderWidth = 1;
-
-    cell.layer.borderColor = [[self colorWithHex:@"#EBEBEB"] CGColor];
+    cell.layer.borderColor = [[self colorWithHex:@"#D5D5D5"] CGColor];
     cell.calendar = self;
     NSDate *date = [self.calculator dateForIndexPath:indexPath];
     cell.image = [self.dataSourceProxy calendar:self imageForDate:date];
