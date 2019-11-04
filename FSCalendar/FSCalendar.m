@@ -1421,6 +1421,7 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
 {
     cell.layer.borderWidth = 1;
     cell.layer.borderColor = [[self colorWithHex:@"#D5D5D5"] CGColor];
+    [cell.appearance setTitleDefaultColor:[self colorWithHex:@"#FFFFFF"]];
     cell.calendar = self;
     NSDate *date = [self.calculator dateForIndexPath:indexPath];
     cell.image = [self.dataSourceProxy calendar:self imageForDate:date];
